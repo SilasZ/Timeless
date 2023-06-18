@@ -355,7 +355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe984cdb4d9a844292d327076af1945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &502182048 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 985902421260564228, guid: 2a651451bc623f54e8a3969536e11900, type: 3}
@@ -396,6 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9cd3dc8da3c9543862dd9d33d420da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 7306033524864509284, guid: 2a651451bc623f54e8a3969536e11900, type: 3}
 --- !u!4 &1056422377
 Transform:
   m_ObjectHideFlags: 0

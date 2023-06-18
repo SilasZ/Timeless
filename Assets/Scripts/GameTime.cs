@@ -6,6 +6,7 @@ public class GameTime : MonoBehaviour
 {
 
     public int Time { get; set;}
+    public GameObject playerPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +18,18 @@ public class GameTime : MonoBehaviour
     void FixedUpdate()
     {
         Time++;
-        if (Time == 100)
+        if (Time == 500)
         {
-            FindObjectOfType<SetAsPlayer>().IsPlayer(false);
+            
+            foreach (var player in FindObjectsOfType<SetAsPlayer>())
+            {
+                if (player.GetComponent<PlayerMovement>().enabled)
+                {
+                    Instantiate(playerPrefab, player.transform.position, player.transform.rotation);
+                    player.GetComponent<SetAsPlayer>().IsPlayer(false);
+                    break;
+                }
+            }
             Time = 0;
             Debug.Log("Jump");
         }
