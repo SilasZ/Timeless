@@ -25,7 +25,8 @@ public class GameTime : MonoBehaviour
             {
                 if (player.GetComponent<PlayerMovement>().enabled)
                 {
-                    Instantiate(playerPrefab, player.transform.position, player.transform.rotation);
+                    var newPlayer = Instantiate(playerPrefab, player.transform.position, player.transform.rotation);
+                    newPlayer.GetComponent<SetAsPlayer>().IsPlayer(true);
                     player.GetComponent<SetAsPlayer>().IsPlayer(false);
                     break;
                 }
