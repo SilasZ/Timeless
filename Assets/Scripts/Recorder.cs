@@ -5,7 +5,7 @@ using UnityEngine;
 public class Recorder : MonoBehaviour
 {
 
-    public GameTime gameTime;
+    private GameTime gameTime;
     Dictionary<int, byte[]> history;
     private ITimeSerial[] timeSerials;
 
@@ -14,6 +14,7 @@ public class Recorder : MonoBehaviour
     {
         history = new Dictionary<int, byte[]>();
         timeSerials = GetComponentsInChildren<ITimeSerial>();
+        gameTime = FindObjectOfType<GameTime>();
     }
 
     private void FixedUpdate()
