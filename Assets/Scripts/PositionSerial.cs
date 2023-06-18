@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class TransformSerial : MonoBehaviour, ITimeSerial
 {
-    public void Deserialize(byte[] data)
+    public int Deserialize(byte[] data, int index)
     {
         Vector3 position = Vector3.zero;
-        position.x = BitConverter.ToSingle(data, 0 * sizeof(float));
-        position.y = BitConverter.ToSingle(data, 1 * sizeof(float));
-        position.z = BitConverter.ToSingle(data, 2 * sizeof(float));
+        position.x = BitConverter.ToSingle(data, index + 0 * sizeof(float));
+        position.y = BitConverter.ToSingle(data, index + 1 * sizeof(float));
+        position.z = BitConverter.ToSingle(data, index + 2 * sizeof(float));
         transform.position = position;
+        return 3 * sizeof(float);
     }
 
     public byte[] Serialize()

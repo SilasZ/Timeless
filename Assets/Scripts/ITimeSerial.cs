@@ -5,5 +5,5 @@ using UnityEngine;
 public interface ITimeSerial
 {
     public byte[] Serialize();
-    public void Deserialize(byte[] data);
+    public int Deserialize(byte[] data, int index);
 }

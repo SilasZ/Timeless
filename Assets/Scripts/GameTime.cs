@@ -19,6 +19,7 @@ public class GameTime : MonoBehaviour
         Time++;
         if (Time == 100)
         {
+            FindObjectOfType<SetAsPlayer>().IsPlayer(false);
             Time = 0;
             Debug.Log("Jump");
         }

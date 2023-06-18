@@ -21,8 +21,11 @@ public class Recorder : MonoBehaviour
     {
         if (history.ContainsKey(gameTime.Time))
         {
-            foreach(ITimeSerial timeSerial in timeSerials) timeSerial.Deserialize(history[gameTime.Time]);
-            Debug.Log(history[gameTime.Time]);
+            int position = 0;
+            foreach (ITimeSerial timeSerial in timeSerials)
+            {
+                position += timeSerial.Deserialize(history[gameTime.Time], position);
+            }
         }
         else
         {
