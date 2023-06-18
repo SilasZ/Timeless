@@ -7,7 +7,7 @@ public class RotationSerial : MonoBehaviour, ITimeSerial
 {
     public void Deserialize(byte[] data)
     {
-        transform.rotation = Quaternion.AngleAxis(BitConverter.ToSingle(data, 0 * sizeof(float)), Vector3.back);
+        transform.rotation = Quaternion.AngleAxis(BitConverter.ToSingle(data, 0 * sizeof(float)), Vector3.forward);
     }
 
     public byte[] Serialize()
