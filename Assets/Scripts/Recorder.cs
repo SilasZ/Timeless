@@ -29,10 +29,15 @@ public class Recorder : MonoBehaviour
         }
         else
         {
-            List<byte> data = new List<byte>();
-            foreach (ITimeSerial timeSerial in timeSerials) data.AddRange(timeSerial.Serialize());
-            history.Add(gameTime.Time, data.ToArray());
+            Record();
         }
+    }
+
+    public void Record()
+    {
+        List<byte> data = new List<byte>();
+        foreach (ITimeSerial timeSerial in timeSerials) data.AddRange(timeSerial.Serialize());
+        history.Add(gameTime.Time, data.ToArray());
     }
 
 }
