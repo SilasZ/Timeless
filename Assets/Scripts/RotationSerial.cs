@@ -7,8 +7,6 @@ public class RotationSerial : MonoBehaviour, ITimeSerial
 {
     public int Deserialize(byte[] data, int index)
     {
-        Debug.Log(transform.rotation.eulerAngles.z);
-
         transform.rotation = Quaternion.Euler(0, 0, BitConverter.ToSingle(data, index));
         return 4;
     }
