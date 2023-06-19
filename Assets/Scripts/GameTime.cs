@@ -15,6 +15,10 @@ public class GameTime : MonoBehaviour
     public List<IJump> jumpObjects = new List<IJump>();
     private bool timeJump = false;
 
+    public delegate void AfterTimeUpdate();
+
+    public event AfterTimeUpdate afterTimeUpdate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +42,10 @@ public class GameTime : MonoBehaviour
                 if (player.GetComponent<PlayerMovement>().enabled)
                 {
                     var newPlayer = Instantiate(playerPrefab, player.transform.position, player.transform.rotation);
-                    newPlayer.GetComponentInChildren<SetAsPlayer>().IsPlayer(true);
+                    newPlayer.GetComponent<SetAsPlayer>().IsPlayer(true);
                     player.gameObject.SetActive(false);
-                    player.GetComponentInParent<Recorder>().Record();
-                    player.GetComponentInChildren<SetAsPlayer>().IsPlayer(false);
+                    player.GetComponent<Recorder>().Record();
+                    player.GetComponent<SetAsPlayer>().IsPlayer(false);
                     break;
                 }
             }
@@ -53,5 +57,7 @@ public class GameTime : MonoBehaviour
                 jumpObject.Jump();
             }
         }
+        afterTimeUpdate?.Invoke();
+
     }
 }

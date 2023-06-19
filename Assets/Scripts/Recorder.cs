@@ -9,15 +9,17 @@ public class Recorder : MonoBehaviour
     Dictionary<int, byte[]> history;
     private ITimeSerial[] timeSerials;
 
+
     // Start is called before the first frame update
     void Start()
     {
         history = new Dictionary<int, byte[]>();
         timeSerials = GetComponentsInChildren<ITimeSerial>();
         gameTime = FindObjectOfType<GameTime>();
+        gameTime.afterTimeUpdate += AfterTimeUpdate;
     }
 
-    private void FixedUpdate()
+    public void AfterTimeUpdate()
     {
         if (history.ContainsKey(gameTime.Time))
         {
