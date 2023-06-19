@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IJump
+{
+    public void Jump();
+}
+
 public class GameTime : MonoBehaviour
 {
 
     public int Time { get; set;}
     public GameObject playerPrefab;
-
+    public List<IJump> jumpObjects = new List<IJump>();
     private bool timeJump = false;
 
     // Start is called before the first frame update
@@ -42,6 +47,11 @@ public class GameTime : MonoBehaviour
             }
             Time = 0;
             Debug.Log("Jump");
+
+            foreach(IJump jumpObject in jumpObjects)
+            {
+                jumpObject.Jump();
+            }
         }
     }
 }
