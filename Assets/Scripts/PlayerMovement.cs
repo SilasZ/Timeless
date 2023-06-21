@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (rb.velocity.magnitude > movementSpeed) return;
-        Settings s = FindObjectOfType<Settings>();
+        Settings s = FindAnyObjectByType<Settings>();
         Vector3 moveDirection = Vector3.zero;
         if (Input.GetKey(s.moveUp))
             moveDirection = moveDirection + Vector3.up;

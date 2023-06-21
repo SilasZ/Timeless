@@ -7,6 +7,6 @@ public class Init : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindObjectOfType<SetAsPlayer>().IsPlayer(true);
+        FindAnyObjectByType<SetAsPlayer>().IsPlayer(true);
     }
 }

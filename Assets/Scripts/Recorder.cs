@@ -15,7 +15,7 @@ public class Recorder : MonoBehaviour
     {
         history = new Dictionary<int, byte[]>();
         timeSerials = GetComponentsInChildren<ITimeSerial>();
-        gameTime = FindObjectOfType<GameTime>();
+        gameTime = FindAnyObjectByType<GameTime>();
         gameTime.afterTimeUpdate += AfterTimeUpdate;
     }
 

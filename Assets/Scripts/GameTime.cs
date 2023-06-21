@@ -37,7 +37,7 @@ public class GameTime : MonoBehaviour
         if (timeJump)
         {
             timeJump = false;
-            foreach (var player in FindObjectsOfType<SetAsPlayer>())
+            foreach (var player in FindObjectsByType<SetAsPlayer>(FindObjectsSortMode.None))
             {
                 if (player.GetComponent<PlayerMovement>().enabled)
                 {

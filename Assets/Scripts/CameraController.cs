@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         Transform player = null;
-        foreach (var v in FindObjectsOfType<PlayerMovement>())
+        foreach (var v in FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None))
         {
             
             if (v.enabled)

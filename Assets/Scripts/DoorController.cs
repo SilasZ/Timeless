@@ -11,7 +11,7 @@ public class DoorController : MonoBehaviour, IJump
     void Start()
     {
         timeZero = Time.time;
-        FindObjectOfType<GameTime>().jumpObjects.Add(this);
+        FindAnyObjectByType<GameTime>().jumpObjects.Add(this);
     }
 
     // Update is called once per frame
