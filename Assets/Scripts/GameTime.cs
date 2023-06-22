@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public interface IJump
 {
@@ -12,8 +15,10 @@ public class GameTime : MonoBehaviour
 
     public int Time { get; set;}
     public GameObject playerPrefab;
+    public Material material;
     public List<IJump> jumpObjects = new List<IJump>();
     private bool timeJump = false;
+    private int swirlStrength = 0;
 
     public delegate void AfterTimeUpdate();
 
@@ -33,8 +38,18 @@ public class GameTime : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Time++;
         if (timeJump)
+        {
+            swirlStrength += 2;
+            material.SetFloat("_Strength", swirlStrength);
+        }
+        else if (swirlStrength > 0)
+        {
+            swirlStrength -= 2;
+            material.SetFloat("_Strength", swirlStrength);
+        }
+        Time++;
+        if (swirlStrength == 50)
         {
             timeJump = false;
             foreach (var player in FindObjectsByType<SetAsPlayer>(FindObjectsSortMode.None))
@@ -51,8 +66,9 @@ public class GameTime : MonoBehaviour
             }
             Time = 0;
             Debug.Log("Jump");
+            
 
-            foreach(IJump jumpObject in jumpObjects)
+            foreach (IJump jumpObject in jumpObjects)
             {
                 jumpObject.Jump();
             }
