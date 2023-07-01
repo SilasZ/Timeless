@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public interface IJump
@@ -15,10 +16,13 @@ public class GameTime : MonoBehaviour
 
     public int Time { get; set;}
     public GameObject playerPrefab;
-    public Material material;
+    public Material timeJumpMaterial;
+    public Material paradoxMaterial;
     public List<IJump> jumpObjects = new List<IJump>();
     private bool timeJump = false;
     private int swirlStrength = 0;
+    private bool gameOver = false;
+    private float glitchStrength = 0;
 
     public delegate void AfterTimeUpdate();
 
@@ -38,15 +42,26 @@ public class GameTime : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (gameOver)
+        {
+            glitchStrength += .01f;
+            paradoxMaterial.SetFloat("_Strength", glitchStrength);
+            if (glitchStrength > 1)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                paradoxMaterial.SetFloat("_Strength", 0);
+            }
+            return;
+        }
         if (timeJump)
         {
             swirlStrength += 2;
-            material.SetFloat("_Strength", swirlStrength);
+            timeJumpMaterial.SetFloat("_Strength", swirlStrength);
         }
         else if (swirlStrength > 0)
         {
             swirlStrength -= 2;
-            material.SetFloat("_Strength", swirlStrength);
+            timeJumpMaterial.SetFloat("_Strength", swirlStrength);
         }
         Time++;
         if (swirlStrength == 50)
@@ -75,5 +90,10 @@ public class GameTime : MonoBehaviour
         }
         afterTimeUpdate?.Invoke();
 
+    }
+
+    public void GameOver()
+    {
+        gameOver = true;
     }
 }

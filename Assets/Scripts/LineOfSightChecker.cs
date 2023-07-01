@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LineOfSightChecker : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class LineOfSightChecker : MonoBehaviour
             }
             var hit = Physics2D.Raycast(castOrigin.position, collision.transform.GetComponentInParent<PlayerMovement>().transform.position - castOrigin.position);
             if (hit.collider.GetComponentInParent<PlayerMovement>() != null)
-                Debug.Log("GG bro!");
+            {
+                FindAnyObjectByType<GameTime>().GameOver();
+            }
+                
 
             foreach (Collider2D collider in myOwnColliders)
             {
